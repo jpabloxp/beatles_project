@@ -53,19 +53,19 @@
                 <div class="carousel-inner">
                     
                     <div class="item active">
-                        <img src="image/sgt_peppers_sm.jpg" alt="first" id="sgt_peppers"/>
+                        <img src="image/sgt_peppers_sm.jpg" alt="first" id="4"/>
                     </div>
                     <div class="item">
-                        <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" id="magical_mystery_tour"/>
+                        <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" id="6"/>
                     </div>
                     <div class="item">
-                        <img src="image/white_album_sm.png" alt="Slide 3" id="white_album"/>
+                        <img src="image/white_album_sm.png" alt="Slide 3" id="9"/>
                     </div>
                     <div class="item">
-                        <img src="image/abbey_road_sm.jpg" alt="Slide 4" id="abbey_road"/>
+                        <img src="image/abbey_road_sm.jpg" alt="Slide 4" id="11"/>
                     </div>
                     <div class="item">
-                        <img src="image/let_it_be_sm.jpg" alt="last" id="let_it_be"/>
+                        <img src="image/let_it_be_sm.jpg" alt="last" id="14"/>
                     </div>
                 </div> 
                 
@@ -78,6 +78,8 @@
             </div>
 
             <div class="titulo">
+            </div>
+            <div class="songs">
             </div>
         
             <div class="row marketing">
@@ -93,13 +95,13 @@
                         </h4>
                         <p>
                             <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 1";
+                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 1";
 
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
+                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
                                     }
                                 } else {
                                     echo "0 results";
@@ -118,13 +120,13 @@
                         <h4>Paul McCartney</h4>
                         <p>
                             <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 2";
+                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 2";
 
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
+                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
                                     }
                                 } else {
                                     echo "0 results";
@@ -143,13 +145,13 @@
                         <h4>George Harrison</h4>
                         <p>
                             <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 3";
+                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 3";
 
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
+                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
                                     }
                                 } else {
                                     echo "0 results";
@@ -168,13 +170,13 @@
                         <h4>Ringo Starr</h4>
                         <p>
                             <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 4";
+                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 4";
 
                                 $result = $conn->query($sql);
                                 if ($result->num_rows > 0) {
                                     // output data of each row
                                     while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
+                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
                                     }
                                 } else {
                                     echo "0 results";

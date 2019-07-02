@@ -2,7 +2,8 @@
 $(function(){
 
     
-    phpCall($(".carousel-inner").find('.active img').attr('id'));
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 1);
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 2);
 
     $(".right.carousel-control").click(function(){
 
@@ -14,7 +15,8 @@ $(function(){
             nextAlbum = activeSlide.next().find('img').attr('id');
         }
         console.log(nextAlbum);
-        phpCall(nextAlbum);
+        phpCall(nextAlbum, 1);
+        phpCall(nextAlbum, 2);
     });
 
     $(".left.carousel-control").click(function(){
@@ -27,52 +29,37 @@ $(function(){
             prevAlbum = activeSlide.prev().find('img').attr('id');
         }
         console.log(prevAlbum);
-        phpCall(prevAlbum);
+        phpCall(prevAlbum, 1);
+        phpCall(prevAlbum, 2);
 
     });
 
-    function phpCall(currentAlbum){
+    function phpCall(currentAlbum, option){
 
-        var parameters;
-    
-        if(currentAlbum === "let_it_be"){
-    
-            parameters = { 
-                'album': 14,
-            };
-        }
-        else if(currentAlbum === "abbey_road"){
-    
-            parameters = { 
-                'album': 11,
-            };
-        }
-        else if(currentAlbum === "white_album"){
-    
-            parameters = { 
-                'album': 9,
-            };
-        }
-        else if(currentAlbum === "magical_mystery_tour"){
-    
-            parameters = { 
-                'album': 6,
-            };
-        }
-        else if(currentAlbum === "sgt_peppers"){
-    
-            parameters = { 
-                'album': 4,
-            };
-        }
+        var parameters = {
+            'option': option,
+            'album': currentAlbum
+        };
 
         $.ajax({
             url: 'query.php',
             method:'POST',
             data: parameters,
             success: function(msg) {
-                $('.titulo').empty();
-                $('.titulo').append(msg);
+
+                if(option == 1){
+
+                    $('.titulo').empty();
+                    $('.titulo').append(msg);
+                }
+                else if(option == 2){
+
+                    $('.songs').empty();
+                    $('.songs').append(msg);
+                }
+                else if(option == 3){
+
+                }
             }
         })
 
