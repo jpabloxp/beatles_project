@@ -1,12 +1,25 @@
 
 .container {
-  margin-top: 2%;
+    margin-top: 2%;
+}
+
+.header{
+    border-bottom: 2px solid lightgray;
+}
+
+.cabecera{
+    padding-top: 3%;
+}
+
+.marketing{
+    border-top: 2px solid lightgray;
+    padding-top: 3%;
 }
 
 .carousel {
     height: 500px;
     width: 500px;
-    margin-bottom: 60px;
+    margin-bottom: 3%;
     margin-top: 3%;
     margin-left: 27%;
 }

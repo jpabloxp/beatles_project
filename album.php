@@ -47,25 +47,25 @@
                 <h3 class="text-muted">The BEATLES project</h3>
             </div>
 
-            <div id="carousel" class="carousel slide" data-ride="carousel">
+            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false" id="carrusel">
                 
                 <!-- Items -->
                 <div class="carousel-inner">
                     
-                    <div class="item active" id="sgt_peppers">
-                        <img src="image/sgt_peppers_sm.jpg" alt="Slide 1" />
+                    <div class="item active">
+                        <img src="image/sgt_peppers_sm.jpg" alt="first" id="sgt_peppers"/>
                     </div>
-                    <div class="item" id="magical_mystery_tour">
-                        <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" />
+                    <div class="item">
+                        <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" id="magical_mystery_tour"/>
                     </div>
-                    <div class="item" id="white_album">
-                        <img src="image/white_album_sm.png" alt="Slide 3" />
+                    <div class="item">
+                        <img src="image/white_album_sm.png" alt="Slide 3" id="white_album"/>
                     </div>
-                    <div class="item" id="abbey_road">
-                        <img src="image/abbey_road_sm.jpg" alt="Slide 4" />
+                    <div class="item">
+                        <img src="image/abbey_road_sm.jpg" alt="Slide 4" id="abbey_road"/>
                     </div>
-                    <div class="item" id="let_it_be">
-                        <img src="image/let_it_be_sm.jpg" alt="Slide 5" />
+                    <div class="item">
+                        <img src="image/let_it_be_sm.jpg" alt="last" id="let_it_be"/>
                     </div>
                 </div> 
                 
