@@ -47,39 +47,52 @@
                 <h3 class="text-muted">The BEATLES project</h3>
             </div>
 
-            <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false" id="carrusel">
-                
-                <!-- Items -->
-                <div class="carousel-inner">
+            <div class="albumPanel">
+
+                <div id="carousel" class="carousel slide" data-ride="carousel" data-interval="false" id="carrusel">
                     
-                    <div class="item active">
-                        <img src="image/sgt_peppers_sm.jpg" alt="first" id="4"/>
+                    <!-- Items -->
+                    <div class="carousel-inner">
+                        
+                        <div class="item active">
+                            <img src="image/sgt_peppers_sm.jpg" alt="first" id="1"/>
+                        </div>
+                        <div class="item">
+                            <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" id="2"/>
+                        </div>
+                        <div class="item">
+                            <img src="image/white_album_sm.png" alt="Slide 3" id="3"/>
+                        </div>
+                        <div class="item">
+                            <img src="image/abbey_road_sm.jpg" alt="Slide 4" id="4"/>
+                        </div>
+                        <div class="item">
+                            <img src="image/let_it_be_sm.jpg" alt="last" id="5"/>
+                        </div>
+                    </div> 
+                    
+                    <a href="#carousel" class="left carousel-control" data-slide="prev">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a href="#carousel" class="right carousel-control" data-slide="next">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+                </div>
+
+                <div class="rightPanel">
+                    
+                    <div class="titulo">
                     </div>
-                    <div class="item">
-                        <img src="image/magical_mystery_tour_sm.jpg" alt="Slide 2" id="6"/>
+                    <div class="songList">
                     </div>
-                    <div class="item">
-                        <img src="image/white_album_sm.png" alt="Slide 3" id="9"/>
+                    <div class="albumFooter">
                     </div>
-                    <div class="item">
-                        <img src="image/abbey_road_sm.jpg" alt="Slide 4" id="11"/>
-                    </div>
-                    <div class="item">
-                        <img src="image/let_it_be_sm.jpg" alt="last" id="14"/>
-                    </div>
-                </div> 
-                
-                <a href="#carousel" class="left carousel-control" data-slide="prev">
-                    <span class="glyphicon glyphicon-chevron-left"></span>
-                </a>
-                <a href="#carousel" class="right carousel-control" data-slide="next">
-                    <span class="glyphicon glyphicon-chevron-right"></span>
-                </a>
+                    
+                </div>
+
             </div>
 
-            <div class="titulo">
-            </div>
-            <div class="songs">
+            <div class="songInfo">
             </div>
         
             <div class="row marketing">
@@ -186,7 +199,7 @@
                         </p>
                        
                     </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="footer">
                     <h3>Contact</h3>
                     
                     <a href="mailto:juan-pablo.rosso@imag.fr">

@@ -16,12 +16,74 @@
     padding-top: 3%;
 }
 
+#footer{
+    border-top: 2px solid lightgray;
+}
+
+.albumPanel{
+    
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+
+.rightPanel{
+    
+    float: left; /* add this */
+    padding-left: 10%;
+    padding-top: 2%;
+}
+
+.titulo{
+    
+    font-size: 21px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px; 
+
+  margin: 0 auto;
+}
+
+.trackHeader{
+    padding-top: 2%;
+    margin: 0 auto;
+}
+
+.albumFooter{
+    padding-top: 2%;
+    margin: 0 auto;
+    text-align: center;
+    vertical-align: middle;
+}
+
+.songList{
+
+    margin: 0 auto;
+
+    font-size: 16px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 30px;
+}
+
+.songInfo{
+    padding-top: 1%;
+    display: block;
+}
+
+.song{
+    color: steelblue;
+    cursor: pointer;
+    display: block;
+}
+.song:hover {
+    text-decoration: underline;
+  }
+
 .carousel {
     height: 500px;
     width: 500px;
     margin-bottom: 2%;
     margin-top: 3%;
-    margin-left: 27%;
+    float: left; /* add this */
 }
 /* Since positioning the image, we need to help out the caption */
  .carousel-caption {
@@ -45,21 +107,4 @@
         font-size: 21px;
         line-height: 1.4;
     }
-}
-
-.titulo{
-    
-    font-size: 21px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 30px; 
-}
-
-.songs{
-    
-    margin-top: 2%;
-    font-size: 16px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 30px; 
 }

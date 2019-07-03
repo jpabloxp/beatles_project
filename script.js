@@ -4,6 +4,7 @@ $(function(){
     
     phpCall($(".carousel-inner").find('.active img').attr('id'), 1);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 2);
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 3);
 
     $(".right.carousel-control").click(function(){
 
@@ -34,6 +35,18 @@ $(function(){
 
     });
 
+    $(document).on ("click", ".song", function () {
+
+        var activeSong = $(this).text();
+        
+        $(".songInfo").css({"border-top-color": "lightgrey", 
+        "border-top-width":"2px", 
+        "border-top-style":"solid"});
+
+        $('.songInfo').empty();
+        $('.songInfo').append("<h3>" + activeSong + "</h3>");
+    });
+
     function phpCall(currentAlbum, option){
 
         var parameters = {
@@ -54,11 +67,14 @@ $(function(){
                 }
                 else if(option == 2){
 
-                    $('.songs').empty();
-                    $('.songs').append(msg);
+                    $('.songList').empty();
+                    $('.songList').append('<p class="trackHeader">Track list:</p>');
+                    $('.songList').append(msg);
                 }
                 else if(option == 3){
 
+                    $('.albumFooter').empty();
+                    $('.albumFooter').append(msg);
                 }
             }
         })

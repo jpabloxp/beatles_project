@@ -23,7 +23,7 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo "Album: " . $row["title"] . ". Year: " . $row["year"] . "<br>";
+                echo $row["title"] . " (" . $row["year"] . ")<br>";
             }
         } else {
             echo "0 results";
@@ -38,11 +38,33 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo $row["song"] . "<br>";
+                echo '<div class="song">' . $row["song"] . '</div>';
             }
         } else {
             echo "0 results";
         }
     }
+    else if($option == 3){
+
+        $res = "Recorded at the following studios: ";
+        $album = $_POST['album'];
+        $sql = "SELECT studio.name as 'studio', studio.location FROM studio INNER JOIN album_studio ON studio.id = album_studio.studio_fk AND album_studio.album_fk = " . $album;
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $res = $res . $row["studio"] . ' (' . $row["location"] . '), ';
+            }
+            $replace = ".";
+            $res = substr($res, 0, -2).$replace;
+            echo $res;
+        } else {
+            echo "0 results";
+        }
+    }
+
+    
+    $conn->close();
 
 ?>
