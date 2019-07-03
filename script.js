@@ -5,6 +5,7 @@ $(function(){
     phpCall($(".carousel-inner").find('.active img').attr('id'), 1);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 2);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 3);
+    //phpCall($(".carousel-inner").find('.active img').attr('id'), 4);
 
     $(".right.carousel-control").click(function(){
 
@@ -18,6 +19,8 @@ $(function(){
         console.log(nextAlbum);
         phpCall(nextAlbum, 1);
         phpCall(nextAlbum, 2);
+        phpCall(nextAlbum, 3);
+        //phpCall(nextAlbum, 4);
     });
 
     $(".left.carousel-control").click(function(){
@@ -32,6 +35,8 @@ $(function(){
         console.log(prevAlbum);
         phpCall(prevAlbum, 1);
         phpCall(prevAlbum, 2);
+        phpCall(prevAlbum, 3);
+        //phpCall(prevAlbum, 4);
 
     });
 
@@ -75,6 +80,9 @@ $(function(){
 
                     $('.albumFooter').empty();
                     $('.albumFooter').append(msg);
+                }
+                else if(option == 4){
+
                 }
             }
         })

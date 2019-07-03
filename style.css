@@ -27,6 +27,7 @@
 
 .rightPanel{
     
+    max-width: 570px;
     float: left; /* add this */
     padding-left: 10%;
     padding-top: 2%;
@@ -48,6 +49,7 @@
 }
 
 .albumFooter{
+    width: 80%;
     padding-top: 2%;
     margin: 0 auto;
     text-align: center;
@@ -56,6 +58,7 @@
 
 .songList{
 
+    max-width: 460px;
     margin: 0 auto;
 
     font-size: 16px;
@@ -65,7 +68,6 @@
 }
 
 .songInfo{
-    padding-top: 1%;
     display: block;
 }
 
