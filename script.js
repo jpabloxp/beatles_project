@@ -6,6 +6,11 @@ $(function(){
     phpCall($(".carousel-inner").find('.active img').attr('id'), 2);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 3);
     //phpCall($(".carousel-inner").find('.active img').attr('id'), 4);
+    
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 91);
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 92);
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 93);
+    phpCall($(".carousel-inner").find('.active img').attr('id'), 94);
 
     $(".right.carousel-control").click(function(){
 
@@ -21,6 +26,11 @@ $(function(){
         phpCall(nextAlbum, 2);
         phpCall(nextAlbum, 3);
         //phpCall(nextAlbum, 4);
+
+        phpCall(nextAlbum, 91);
+        phpCall(nextAlbum, 92);
+        phpCall(nextAlbum, 93);
+        phpCall(nextAlbum, 94);
     });
 
     $(".left.carousel-control").click(function(){
@@ -37,6 +47,11 @@ $(function(){
         phpCall(prevAlbum, 2);
         phpCall(prevAlbum, 3);
         //phpCall(prevAlbum, 4);
+
+        phpCall(prevAlbum, 91);
+        phpCall(prevAlbum, 92);
+        phpCall(prevAlbum, 93);
+        phpCall(prevAlbum, 94);
 
     });
 
@@ -83,6 +98,27 @@ $(function(){
                 }
                 else if(option == 4){
 
+                }
+                
+                else if(option == 91){
+
+                    $('.albumLennon').empty();
+                    $('.albumLennon').append(msg);
+                }
+                else if(option == 92){
+
+                    $('.albumMacca').empty();
+                    $('.albumMacca').append(msg);
+                }
+                else if(option == 93){
+
+                    $('.albumHarrison').empty();
+                    $('.albumHarrison').append(msg);
+                }
+                else if(option == 94){
+
+                    $('.albumRingo').empty();
+                    $('.albumRingo').append(msg);
                 }
             }
         })

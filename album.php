@@ -87,7 +87,7 @@
                     </div>
                     <div class="albumFooter">
                     </div>
-                    
+
                 </div>
 
             </div>
@@ -106,23 +106,8 @@
                         <h4>
                             John Lennon
                         </h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 1";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="albumLennon">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -131,23 +116,8 @@
                         </div>
 
                         <h4>Paul McCartney</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 2";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="albumMacca">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -156,23 +126,8 @@
                         </div>
                         
                         <h4>George Harrison</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 3";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="albumHarrison">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -181,23 +136,8 @@
                         </div>
                         
                         <h4>Ringo Starr</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM catalogue INNER JOIN beatle ON catalogue.writer_fk = beatle.id AND beatle.id = 4";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He is recognized as a songwriter in " . $row["total"]. " tracks.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                $conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="albumRingo">
+                        </div>
                     </div>
                 <div class="col-lg-12" id="footer">
                     <h3>Contact</h3>
