@@ -15,8 +15,8 @@
     } 
 
     if($option == 1){
-//QUERY TO GET TITLE AND YEAR OF ALBUM
-        $album = $_POST['album'];
+        //QUERY TO GET TITLE AND YEAR OF ALBUM
+        $album = $_POST['item'];
         $sql = "SELECT name as 'title', year FROM album WHERE id = " . $album;
 
         $result = $conn->query($sql);
@@ -31,7 +31,7 @@
     }
     else if($option == 2){
         //QUERY TO GET LIST OF SONGS OF AN ALBUM
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT DISTINCT song.name as 'song' FROM song INNER JOIN catalogue ON song.id = catalogue.song_fk 
         AND catalogue.album_fk = " . $album;
 
@@ -48,7 +48,7 @@
     else if($option == 3){
         //QUERY TO GET LIST OF STUDIOS AND LOCATIONS WHERE THE ALBUM WAS RECORDED
         $res = "Recorded at the following studios: ";
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT studio.name as 'studio', studio.location FROM studio INNER JOIN album_studio 
         ON studio.id = album_studio.studio_fk AND album_studio.album_fk = " . $album;
 
@@ -81,15 +81,57 @@
         }
     }
     else if($option == 4){
-        //QUERY TO GET LENGHT IN TIME OF THE ALBUM
+        //QUERY TO GET THE ID OF THE SONG
+        $song = $_POST['item'];
+        $songID = null;
 
+        $sql = 'SELECT id FROM song WHERE name = "' . $song . '"';
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $songID = $row["id"];
+            }
+        } else {
+            echo "0 results";
+        }
+
+        //QUERY TO GET THE PLAYED INSTRUMENT AND PLAYERS FOR A GIVEN SONG
+        $sql = "SELECT temp.instrument, beatle.name, beatle.lastname FROM (SELECT instrument.name as 'instrument', instrument.player_fk 
+        FROM song_instrument INNER JOIN instrument ON song_instrument.instrument_fk = instrument.id AND song_instrument.song_fk = "
+        . $songID .") as temp INNER JOIN beatle ON temp.player_fk = beatle.id";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+
+            $res = array('John Lennon: ', 'Paul McCartney: ', 'George Harrison: ', 'Ringo Starr: ', 'Other: ');
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                
+                if($row["lastname"] == "Lennon") $res[0] = $res[0] . $row["instrument"] . ", ";
+                else if($row["lastname"] == "McCartney") $res[1] = $res[1] . $row["instrument"] . ", ";
+                else if($row["lastname"] == "Harrison") $res[2] = $res[2] . $row["instrument"] . ", ";
+                else if($row["lastname"] == "Starr") $res[3] = $res[3] . $row["instrument"] . ", ";
+                else if($row["lastname"] == "Other") $res[4] = $res[4] . $row["instrument"] . ", ";
+            }
+            
+            $replace = ".";
+
+            foreach($res as $resp){
+                $resp = substr($resp, 0, -2).$replace;
+                echo '<p>' . $resp . '</p>';
+            }
+        } else {
+            echo "0 results";
+        }
     }
     
     else if($option == 91){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY LENNON ON THE ALBUM
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT COUNT(*) as 'total'
-        FROM (SELECT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
+        FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
         ON temp.instrument_fk = instrument.id AND instrument.player_fk = 1";
 
@@ -105,9 +147,9 @@
     }
     else if($option == 92){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY MACCA ON THE ALBUM
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT COUNT(*) as 'total'
-        FROM (SELECT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
+        FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
         ON temp.instrument_fk = instrument.id AND instrument.player_fk = 2";
 
@@ -123,9 +165,9 @@
     }
     else if($option == 93){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY HARRISON ON THE ALBUM
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT COUNT(*) as 'total'
-        FROM (SELECT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
+        FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
         ON temp.instrument_fk = instrument.id AND instrument.player_fk = 3";
 
@@ -141,9 +183,9 @@
     }
     else if($option == 94){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY STARR ON THE ALBUM
-        $album = $_POST['album'];
+        $album = $_POST['item'];
         $sql = "SELECT COUNT(*) as 'total'
-        FROM (SELECT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
+        FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
         ON temp.instrument_fk = instrument.id AND instrument.player_fk = 4";
 

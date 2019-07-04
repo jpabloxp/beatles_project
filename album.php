@@ -83,7 +83,10 @@
                     
                     <div class="titulo">
                     </div>
-                    <div class="songList">
+                    <p class="trackHeader">Track list:</p>
+                    <div class="controlOverflow">
+                        <div class="songList">
+                        </div>
                     </div>
                     <div class="albumFooter">
                     </div>

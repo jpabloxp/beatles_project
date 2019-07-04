@@ -2,11 +2,12 @@
 $(function(){
 
     
+    //UPDATE THE TITLE, SONGS AND METADATA FOR THE GIVEN ALBUM
     phpCall($(".carousel-inner").find('.active img').attr('id'), 1);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 2);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 3);
-    //phpCall($(".carousel-inner").find('.active img').attr('id'), 4);
     
+    //UPDATE INSTRUMENT INFORMATION OF EACH BEATLE FOR THE GIVEN ALBUM
     phpCall($(".carousel-inner").find('.active img').attr('id'), 91);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 92);
     phpCall($(".carousel-inner").find('.active img').attr('id'), 93);
@@ -22,11 +23,12 @@ $(function(){
             nextAlbum = activeSlide.next().find('img').attr('id');
         }
         console.log(nextAlbum);
+        //UPDATE THE TITLE, SONGS AND METADATA FOR THE GIVEN ALBUM
         phpCall(nextAlbum, 1);
         phpCall(nextAlbum, 2);
         phpCall(nextAlbum, 3);
-        //phpCall(nextAlbum, 4);
 
+        //UPDATE INSTRUMENT INFORMATION OF EACH BEATLE FOR THE GIVEN ALBUM
         phpCall(nextAlbum, 91);
         phpCall(nextAlbum, 92);
         phpCall(nextAlbum, 93);
@@ -43,11 +45,12 @@ $(function(){
             prevAlbum = activeSlide.prev().find('img').attr('id');
         }
         console.log(prevAlbum);
+        //UPDATE THE TITLE, SONGS AND METADATA FOR THE GIVEN ALBUM
         phpCall(prevAlbum, 1);
         phpCall(prevAlbum, 2);
         phpCall(prevAlbum, 3);
-        //phpCall(prevAlbum, 4);
 
+        //UPDATE INSTRUMENT INFORMATION OF EACH BEATLE FOR THE GIVEN ALBUM
         phpCall(prevAlbum, 91);
         phpCall(prevAlbum, 92);
         phpCall(prevAlbum, 93);
@@ -65,13 +68,15 @@ $(function(){
 
         $('.songInfo').empty();
         $('.songInfo').append("<h3>" + activeSong + "</h3>");
+        
+        phpCall(activeSong, 4);
     });
 
-    function phpCall(currentAlbum, option){
+    function phpCall(currentItem, option){
 
         var parameters = {
             'option': option,
-            'album': currentAlbum
+            'item': currentItem
         };
 
         $.ajax({
@@ -80,6 +85,7 @@ $(function(){
             data: parameters,
             success: function(msg) {
 
+                //UPDATE THE TITLE, SONGS AND METADATA FOR THE GIVEN ALBUM
                 if(option == 1){
 
                     $('.titulo').empty();
@@ -88,7 +94,6 @@ $(function(){
                 else if(option == 2){
 
                     $('.songList').empty();
-                    $('.songList').append('<p class="trackHeader">Track list:</p>');
                     $('.songList').append(msg);
                 }
                 else if(option == 3){
@@ -98,8 +103,10 @@ $(function(){
                 }
                 else if(option == 4){
 
+                    $('.songInfo').append(msg);
                 }
                 
+                //UPDATE INSTRUMENT INFORMATION OF EACH BEATLE FOR THE GIVEN ALBUM
                 else if(option == 91){
 
                     $('.albumLennon').empty();
@@ -124,13 +131,5 @@ $(function(){
         })
 
     }
-
-
-
-
-    /* var parameters = { 
-        'w': $('input[name="w"]').val(),
-        'submit': $('input[name="submit"]').val()
-      }; */
 
 });
