@@ -1,17 +1,3 @@
-<?php
-    
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $dbname = "db_test";
-
-    // Create connection
-    $conn = new mysqli($servername, $username, $password, $dbname);
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    } 
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -38,11 +24,11 @@
 
             <div class="header clearfix">
                 <nav>
-                <ul class="nav nav-pills pull-right">
-                    <li role="presentation"><a href="home.php">Home</a></li>
-                    <li role="presentation" class="active"><a href="album.php">Albums</a></li>
-                    <li role="presentation"><a href="publications.html">Publications</a></li>
-                </ul>
+                    <ul class="nav nav-pills pull-right">
+                        <li role="presentation"><a href="home.php">Home</a></li>
+                        <li role="presentation" class="active"><a href="album.php">Albums</a></li>
+                        <li role="presentation"><a href="publications.html">Publications</a></li>
+                    </ul>
                 </nav>
                 <h3 class="text-muted">The BEATLES project</h3>
             </div>
@@ -88,11 +74,15 @@
                         <div class="songList">
                         </div>
                     </div>
-                    <div class="albumFooter">
-                    </div>
-
                 </div>
+            </div>
 
+            <div class="albumFooter">
+                
+                <div class="leftFooter">
+                </div>
+                <div class="rightFooter">
+                </div>
             </div>
 
             <div class="songInfo">
@@ -166,6 +156,6 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 
-        <script type="text/javascript" src="script.js"></script>
+        <script type="text/javascript" src="albumScript.js"></script>
     </body>
 </html>

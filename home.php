@@ -69,23 +69,8 @@
                         <h4>
                             John Lennon
                         </h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 1";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="homeLennon">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -94,23 +79,8 @@
                         </div>
 
                         <h4>Paul McCartney</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 2";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="homeMacca">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -119,23 +89,8 @@
                         </div>
                         
                         <h4>George Harrison</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 3";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                //$conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="homeHarrison">
+                        </div>
                     </div>
                     <div class="col-lg-3">
     
@@ -144,25 +99,10 @@
                         </div>
                         
                         <h4>Ringo Starr</h4>
-                        <p>
-                            <?php
-                                $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 4";
-
-                                $result = $conn->query($sql);
-                                if ($result->num_rows > 0) {
-                                    // output data of each row
-                                    while($row = $result->fetch_assoc()) {
-                                        echo "He has played " . $row["total"]. " different instruments throughout the Beatles history.<br>";
-                                    }
-                                } else {
-                                    echo "0 results";
-                                }
-                                $conn->close();
-                            ?>
-                        </p>
-                       
+                        <div class="homeRingo">
+                        </div>
                     </div>
-                <div class="col-lg-12">
+                <div class="col-lg-12" id="footer">
                     <h3>Contact</h3>
                     
                     <a href="mailto:juan-pablo.rosso@imag.fr">
@@ -185,5 +125,7 @@
         <!-- Latest compiled and minified JavaScript -->
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        
+        <script type="text/javascript" src="homeScript.js"></script>
     </body>
 </html>

@@ -46,9 +46,25 @@
         }
     }
     else if($option == 3){
-        //QUERY TO GET LIST OF STUDIOS AND LOCATIONS WHERE THE ALBUM WAS RECORDED
-        $res = "Recorded at the following studios: ";
+        //QUERY TO GET LENGHT IN TIME OF THE ALBUM
         $album = $_POST['item'];
+
+        $sql = "SELECT SEC_TO_TIME( SUM( TIME_TO_SEC( song.length ) ) ) AS timeSum 
+        FROM (SELECT catalogue.album_fk, catalogue.song_fk FROM `catalogue` WHERE catalogue.album_fk = "
+        . $album ." GROUP BY catalogue.song_fk) as temp INNER JOIN song ON song.id = temp.song_fk";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $res = '<p><b>Total length:</b> ' . $row["timeSum"] . '</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        //QUERY TO GET LIST OF STUDIOS AND LOCATIONS WHERE THE ALBUM WAS RECORDED
+        $res = $res . "<b>Recorded at the following studios:</b> ";
         $sql = "SELECT studio.name as 'studio', studio.location FROM studio INNER JOIN album_studio 
         ON studio.id = album_studio.studio_fk AND album_studio.album_fk = " . $album;
 
@@ -60,27 +76,47 @@
             }
             $replace = ".";
             $res = substr($res, 0, -2).$replace;
+            
+            echo $res;
         } else {
             echo "0 results";
         }
 
+    }
+    else if($option == 4){
         //QUERY TO GET LENGHT IN TIME OF THE ALBUM
-        $sql = "SELECT SEC_TO_TIME( SUM( TIME_TO_SEC( song.length ) ) ) AS timeSum 
-        FROM (SELECT catalogue.album_fk, catalogue.song_fk FROM `catalogue` WHERE catalogue.album_fk = "
-        . $album ." GROUP BY catalogue.song_fk) as temp INNER JOIN song ON song.id = temp.song_fk";
+        $album = $_POST['item'];
+
+        $sql = "SELECT COUNT(DISTINCT catalogue.song_fk) as 'total' FROM catalogue WHERE catalogue.album_fk = ". $album;
 
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                $res = $res . '<p>Total length: ' . $row["timeSum"] . '</p>';
+                $res = '<p><b>Number of tracks:</b> ' . $row["total"] . '</p>';
             }
+        } else {
+            echo "0 results";
+        }
+
+        //QUERY TO GET LIST OF STUDIOS AND LOCATIONS WHERE THE ALBUM WAS RECORDED
+        $sql = "SELECT COUNT(*) as 'total' FROM (SELECT DISTINCT catalogue.song_fk FROM catalogue WHERE catalogue.album_fk = ". $album 
+        .") as temp INNER JOIN song_instrument ON temp.song_fk = song_instrument.song_fk";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $res = $res . '<p><b>Amount of instruments played:</b> ' . $row["total"] . '</p>';
+            }
+            
             echo $res;
         } else {
             echo "0 results";
         }
+
     }
-    else if($option == 4){
+    else if($option == 5){
         //QUERY TO GET THE ID OF THE SONG
         $song = $_POST['item'];
         $songID = null;
@@ -105,7 +141,7 @@
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
 
-            $res = array('John Lennon: ', 'Paul McCartney: ', 'George Harrison: ', 'Ringo Starr: ', 'Other: ');
+            $res = array('<b>John Lennon:</b> ', '<b>Paul McCartney:</b> ', '<b>George Harrison:</b> ', '<b>Ringo Starr:</b> ', '<b>Other:</b> ');
             // output data of each row
             while($row = $result->fetch_assoc()) {
                 
@@ -119,8 +155,9 @@
             $replace = ".";
 
             foreach($res as $resp){
+
                 $resp = substr($resp, 0, -2).$replace;
-                echo '<p>' . $resp . '</p>';
+                if(strlen($resp) > 13)  echo '<p class="songPlayer">' . $resp . '</p>';
             }
         } else {
             echo "0 results";
@@ -130,6 +167,20 @@
     else if($option == 91){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY LENNON ON THE ALBUM
         $album = $_POST['item'];
+        $resp = null;
+
+        $sql = "SELECT COUNT(*) as 'total' FROM catalogue WHERE catalogue.writer_fk = 1 AND catalogue.album_fk = ". $album;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . '<p>He wrote ' . $row["total"] . ' different songs in this album.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+
         $sql = "SELECT COUNT(*) as 'total'
         FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
@@ -139,8 +190,9 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
+                $resp = $resp . '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
             }
+            echo $resp;
         } else {
             echo "0 results";
         }
@@ -148,6 +200,20 @@
     else if($option == 92){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY MACCA ON THE ALBUM
         $album = $_POST['item'];
+        $resp = null;
+
+        $sql = "SELECT COUNT(*) as 'total' FROM catalogue WHERE catalogue.writer_fk = 2 AND catalogue.album_fk = ". $album;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . '<p>He wrote ' . $row["total"] . ' different songs in this album.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+
         $sql = "SELECT COUNT(*) as 'total'
         FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
@@ -157,8 +223,9 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
+                $resp = $resp . '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
             }
+            echo $resp;
         } else {
             echo "0 results";
         }
@@ -166,6 +233,20 @@
     else if($option == 93){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY HARRISON ON THE ALBUM
         $album = $_POST['item'];
+        $resp = null;
+
+        $sql = "SELECT COUNT(*) as 'total' FROM catalogue WHERE catalogue.writer_fk = 3 AND catalogue.album_fk = ". $album;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . '<p>He wrote ' . $row["total"] . ' different songs in this album.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+
         $sql = "SELECT COUNT(*) as 'total'
         FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
@@ -175,8 +256,9 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
+                $resp = $resp . '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
             }
+            echo $resp;
         } else {
             echo "0 results";
         }
@@ -184,6 +266,20 @@
     else if($option == 94){
         //QUERY TO AMOUNT OF INSTRUMENTS PLAYED BY STARR ON THE ALBUM
         $album = $_POST['item'];
+        $resp = null;
+
+        $sql = "SELECT COUNT(*) as 'total' FROM catalogue WHERE catalogue.writer_fk = 4 AND catalogue.album_fk = ". $album;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . '<p>He wrote ' . $row["total"] . ' different songs in this album.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+
         $sql = "SELECT COUNT(*) as 'total'
         FROM (SELECT DISTINCT song_instrument.instrument_fk FROM catalogue INNER JOIN song_instrument ON catalogue.album_fk = "
         . $album . " AND catalogue.song_fk = song_instrument.song_fk) as temp INNER JOIN instrument
@@ -193,14 +289,135 @@
         if ($result->num_rows > 0) {
             // output data of each row
             while($row = $result->fetch_assoc()) {
-                echo '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
+                $resp = $resp . '<p>He played ' . $row["total"] . ' different instruments in this album.</p>';
             }
+            echo $resp;
+        } else {
+            echo "0 results";
+        }
+    }
+    
+    else if($option == 95){
+        //QUERY TO AMOUNT OF INSTRUMENTS PLAYED AND SONGWRITING BY LENNON
+
+        $resp = null;
+        
+        $sql = "SELECT COUNT(*) as total FROM catalogue WHERE catalogue.writer_fk = 1";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = '<p>He has writen ' . $row["total"] . ' different songs throughout the Beatles history.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 1";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . "<p>He has played " . $row["total"]. " different instruments throughout the Beatles history.</p>";
+            }
+            echo $resp;
+        } else {
+            echo "0 results";
+        }
+    }
+    else if($option == 96){
+        //QUERY TO AMOUNT OF INSTRUMENTS PLAYED AND SONGWRITING BY MACCA
+
+        $resp = null;
+        
+        $sql = "SELECT COUNT(*) as total FROM catalogue WHERE catalogue.writer_fk = 2";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = '<p>He has writen ' . $row["total"] . ' different songs throughout the Beatles history.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 2";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . "<p>He has played " . $row["total"]. " different instruments throughout the Beatles history.</p>";
+            }
+            echo $resp;
+        } else {
+            echo "0 results";
+        }
+    }
+    else if($option == 97){
+        //QUERY TO AMOUNT OF INSTRUMENTS PLAYED AND SONGWRITING BY HARRISON
+
+        $resp = null;
+        
+        $sql = "SELECT COUNT(*) as total FROM catalogue WHERE catalogue.writer_fk = 3";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = '<p>He has writen ' . $row["total"] . ' different songs throughout the Beatles history.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 3";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . "<p>He has played " . $row["total"]. " different instruments throughout the Beatles history.</p>";
+            }
+            echo $resp;
+        } else {
+            echo "0 results";
+        }
+    }
+    else if($option == 98){
+        //QUERY TO AMOUNT OF INSTRUMENTS PLAYED AND SONGWRITING BY STARR
+
+        $resp = null;
+        
+        $sql = "SELECT COUNT(*) as total FROM catalogue WHERE catalogue.writer_fk = 4";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = '<p>He has writen ' . $row["total"] . ' different songs throughout the Beatles history.</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+
+        $sql = "SELECT COUNT(*) as total FROM instrument WHERE player_fk = 4";
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $resp = $resp . "<p>He has played " . $row["total"]. " different instruments throughout the Beatles history.</p>";
+            }
+            echo $resp;
         } else {
             echo "0 results";
         }
     }
 
-    //SELECT * FROM (SELECT beatle.lastname, instrument.id as 'instID', instrument.name FROM beatle LEFT JOIN instrument ON beatle.id = instrument.player_fk) as temp INNER JOIN song_instrument ON temp.instID = song_instrument.instrument_fk AND song_instrument.song_fk = 1
     $conn->close();
 
 ?>

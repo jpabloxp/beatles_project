@@ -27,7 +27,7 @@
 
 .rightPanel{
     
-    max-width: 570px;
+    max-width: 610px;
     float: left; /* add this */
     padding-left: 10%;
     padding-top: 2%;
@@ -51,15 +51,22 @@
 }
 
 .albumFooter{
-    width: 80%;
-    padding-top: 2%;
     margin: 0 auto;
-    text-align: center;
-    vertical-align: middle;
+    padding-bottom: 1%;
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+.leftFooter{
+    width: 60%;
+    float: left; /* add this */
+}
+.rightFooter{
+    width: 40%;
+    float: left; /* add this */
 }
 
 .controlOverflow{
-    height: 410px;
+    height: 450px;
+    min-width: 468px;
     overflow-y: scroll;
 }
 
@@ -86,6 +93,10 @@
 .song:hover {
     text-decoration: underline;
   }
+
+.songPlayer{
+    padding-left: 2%;
+}
 
 .carousel {
     height: 500px;
