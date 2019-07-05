@@ -152,13 +152,77 @@
                 else if($row["lastname"] == "Other") $res[4] = $res[4] . $row["instrument"] . ", ";
             }
             
-            $replace = ".";
+            $replace = "";
 
             foreach($res as $resp){
-
-                $resp = substr($resp, 0, -2).$replace;
-                if(strlen($resp) > 13)  echo '<p class="songPlayer">' . $resp . '</p>';
+                
+                if(substr_compare($resp, ", ", -2) == 0){
+                    $resp = substr($resp, 0, -2).$replace;
+                    echo '<p class="songPlayer">' . $resp . '</p>';
+                }
             }
+        } else {
+            echo "0 results";
+        }
+    }
+    else if($option == 6){
+        //QUERY TO GET THE ID OF THE SONG
+        $song = $_POST['item'];
+        $songID = null;
+
+        $sql = 'SELECT id FROM song WHERE name = "' . $song . '"';
+
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                $songID = $row["id"];
+            }
+        } else {
+            echo "0 results";
+        }
+
+        //QUERY TO GET THE LENGTH OF THE SONG
+        $sql = "SELECT song.length FROM song WHERE song.id = ". $songID;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                
+                echo '<p><b>Length: </b>' . $row["length"] . '</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+        //QUERY TO GET THE NUMBER OF INSTRUMENTS PLAYED IN THE SONG
+        $sql = "SELECT COUNT(*) as total FROM song_instrument WHERE song_instrument.song_fk = ". $songID;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                
+                echo '<p><b>Amount of instruments played: </b>' . $row["total"] . '</p>';
+            }
+        } else {
+            echo "0 results";
+        }
+        //QUERY TO GET THE SONGWRITERS
+        $resp = "<p><b>Songwriters: </b>";
+        $sql = "SELECT beatle.name, beatle.lastname FROM beatle INNER JOIN catalogue ON catalogue.writer_fk = beatle.id 
+        AND catalogue.song_fk = ". $songID;
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+
+            // output data of each row
+            while($row = $result->fetch_assoc()) {
+                
+                $resp = $resp . $row["name"] . ' '. $row["lastname"] . ', ';
+            }
+            $replace = "";
+            $resp = substr($resp, 0, -2).$replace;
+            echo $resp . '</p>';
         } else {
             echo "0 results";
         }

@@ -86,6 +86,16 @@
             </div>
 
             <div class="songInfo">
+
+                <div class="songTitle">
+                </div>
+                <div class="songData">
+                    
+                    <div class="leftData">
+                    </div>
+                    <div class="rightData">
+                    </div>
+                </div>
             </div>
         
             <div class="row marketing">

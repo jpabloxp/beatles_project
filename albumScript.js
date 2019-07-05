@@ -69,10 +69,13 @@ $(function(){
         "border-top-width":"2px", 
         "border-top-style":"solid"});
 
-        $('.songInfo').empty();
-        $('.songInfo').append("<h3>" + activeSong + "</h3>");
+        $('.songTitle').empty();
+        $('.leftData').empty();
+        $('.rightData').empty();
+        $('.songTitle').append("<h3>" + activeSong + "</h3>");
         
         phpCall(activeSong, 5);
+        phpCall(activeSong, 6);
     });
 
     function phpCall(currentItem, option){
@@ -111,7 +114,11 @@ $(function(){
                 }
                 else if(option == 5){
 
-                    $('.songInfo').append(msg);
+                    $('.leftData').append(msg);
+                }
+                else if(option == 6){
+
+                    $('.rightData').append(msg);
                 }
                 
                 //UPDATE INSTRUMENT INFORMATION OF EACH BEATLE FOR THE GIVEN ALBUM

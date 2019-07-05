@@ -85,6 +85,18 @@
     display: block;
 }
 
+.songData{
+    overflow: hidden; /* will contain if #first is longer than #second */
+}
+.leftData{
+    width: 60%;
+    float: left; /* add this */
+}
+.rightData{
+    width: 40%;
+    float: left; /* add this */
+}
+
 .song{
     color: steelblue;
     cursor: pointer;
